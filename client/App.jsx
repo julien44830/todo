@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Ajouter from "./components/Ajouter";
-import Modale from "./components/Modale";
-import Taches from "./components/Taches";
+import Ajouter from "./src/components/Ajouter";
+import Modale from "./src/components/Modale";
+import Taches from "./src/components/Taches";
 
 function App() {
     const [taches, setTaches] = useState([]);

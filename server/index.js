@@ -2,8 +2,8 @@ import express from 'express';
 import { json } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import routes from '../src/routers/router.js';
-import connection from '../dbConfig.js'; // Importez votre fichier de configuration de base de données
+import routes from './routers/router.js';
+import connection from './dbConfig.js'; // Importez votre fichier de configuration de base de données
 
 // Chargement des variables d'environnement depuis le fichier .env
 dotenv.config();
