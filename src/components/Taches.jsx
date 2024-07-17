@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Taches({ taches }) {
     const [sousTaches, setSousTaches] = useState([]);
-    console.log("%c⧭", "color: #00e600", sousTaches);
 
     useEffect(() => {
         fetch("http://localhost:3000/api/soustaches")
@@ -20,116 +19,59 @@ function Taches({ taches }) {
 
     return (
         <div>
-            <h1>Liste des Tâches</h1>
+            <h1 className="h1-tache">Liste des Tâches</h1>
             <ul className="liste-tache">
-                {taches.map((tache) => (
-                    <>
-                        <li key={tache.id}>
-                            <button className="btn-mobile-modifier">
-                                <img
-                                    src="modifier.png"
-                                    alt=""
-                                />
-                            </button>
-                            <strong>{tache.titre}</strong>: {tache.description}
-                            <section className="section-action-liste">
-                                <button className="btn-desktop-modifier">
+                {taches.map((tache, index) => {
+                    // Calculer le délai d'animation basé sur l'index
+                    const delay = `${index / 3}s `;
+
+                    // Style pour l'animation avec un délai dynamique
+                    const animationStyle = {
+                        animation: `slide ${delay}  ease-in-out `,
+                    };
+
+                    return (
+                        <React.Fragment key={tache.id}>
+                            <li style={animationStyle} className="liste-todo">
+                                <button className="btn-mobile-modifier">
                                     <img
                                         src="modifier.png"
-                                        alt=""
+                                        alt="modifier"
                                     />
                                 </button>
-                                <section>
-                                    <button>
+                                <strong>{tache.titre}</strong>:{" "}
+                                {tache.description}
+                                <section className="section-action-liste">
+                                    <button className="btn-desktop-modifier">
                                         <img
-                                            src="valider.png"
-                                            alt=""
+                                            src="modifier.png"
+                                            alt="modifier"
                                         />
                                     </button>
-                                    <button>
-                                        <img
-                                            src="supprimer.png"
-                                            alt=""
-                                        />
-                                    </button>
+                                    <section>
+                                        <button>
+                                            <img
+                                                src="valider.png"
+                                                alt="valider"
+                                            />
+                                        </button>
+                                        <button>
+                                            <img
+                                                src="supprimer.png"
+                                                alt="supprimer"
+                                            />
+                                        </button>
+                                    </section>
                                 </section>
-                            </section>
-                        </li>
-                        <img src="derouler.png" alt="" />
-                    </>
-                ))}
-                {taches.map((tache) => (
-                    <>
-                        <li key={tache.id}>
-                            <button className="btn-mobile-modifier">
-                                <img
-                                    src="modifier.png"
-                                    alt=""
-                                />
-                            </button>
-                            <strong>{tache.titre}</strong>: {tache.description}
-                            <section className="section-action-liste">
-                                <button className="btn-desktop-modifier">
-                                    <img
-                                        src="modifier.png"
-                                        alt=""
-                                    />
-                                </button>
-                                <section>
-                                    <button>
-                                        <img
-                                            src="valider.png"
-                                            alt=""
-                                        />
-                                    </button>
-                                    <button>
-                                        <img
-                                            src="supprimer.png"
-                                            alt=""
-                                        />
-                                    </button>
-                                </section>
-                            </section>
-                        </li>
-                        <img src="derouler.png" alt="" />
-                    </>
-                ))}
-                {taches.map((tache) => (
-                    <>
-                        <li key={tache.id}>
-                            <button className="btn-mobile-modifier">
-                                <img
-                                    src="modifier.png"
-                                    alt=""
-                                />
-                            </button>
-                            <strong>{tache.titre}</strong>: {tache.description}
-                            <section className="section-action-liste">
-                                <button className="btn-desktop-modifier">
-                                    <img
-                                        src="modifier.png"
-                                        alt=""
-                                    />
-                                </button>
-                                <section>
-                                    <button>
-                                        <img
-                                            src="valider.png"
-                                            alt=""
-                                        />
-                                    </button>
-                                    <button>
-                                        <img
-                                            src="supprimer.png"
-                                            alt=""
-                                        />
-                                    </button>
-                                </section>
-                            </section>
-                        </li>
-                        <img src="derouler.png" alt="" />
-                    </>
-                ))}
+                            <img
+                            className="derouler-arrow"
+                                src="derouler.png"
+                                alt="derouler"
+                            />
+                            </li>
+                        </React.Fragment>
+                    );
+                })}
             </ul>
         </div>
     );

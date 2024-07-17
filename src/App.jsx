@@ -27,7 +27,6 @@ function App() {
                 <Taches taches={taches} />
             </main>
                 <Ajouter setModale={setModale} modale={modale}/>
-                <div className="blur footer-blur"></div>
                 {modale ? '': <Modale />}
             
         </>

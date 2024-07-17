@@ -9,8 +9,17 @@ button,
 input[type="button"],
 input[type="submit"],
 input[type="reset"] {
-    /* Réinitialisation de toutes les propriétés à leurs valeurs par défaut */
     all: unset;
+}
+
+.h1-tache {
+    z-index: 5;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    width: 100vw;
+    box-shadow: -1px 20px 20px rgb(255, 255, 255);
+    background: rgba(255, 254, 254, 0.9);
 }
 
 .btn-desktop-modifier {
@@ -25,6 +34,9 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
+    width: 100vw;
+    padding: 100px;
 
     > li {
         /* height: 50px; */
@@ -34,14 +46,13 @@ img {
         justify-content: center;
         align-items: center;
         border-radius: 15px;
-        box-shadow: 0px 10px 20px grey;
+        box-shadow: -1px 5px 7px rgba(0, 0, 0, 0.205);
         width: 90vw;
     }
 
     > img {
         position: relative;
         top: -15px;
-        text-shadow: 0px 10px 20px grey;
     }
 }
 
@@ -51,10 +62,15 @@ img {
     flex-direction: column;
 }
 
+.derouler-arrow {
+    position: absolute;
+    margin-top: 60px;
+    animation: deroule 5s ease-in-out infinite;
+}
+
 .display {
     display: none;
     transition: 500ms;
-
 }
 
 .section-btn-ajouter {
@@ -63,28 +79,36 @@ img {
     flex-direction: column;
     bottom: 0;
     text-align: center;
+    box-shadow: -1px -20px 20px rgb(255, 255, 255);
+    background: rgba(255, 254, 254, 0.9);
 }
 .btn-ajouter {
+    z-index: 5;
+    padding: 10px;
     > img {
         width: 20%;
+        animation: rotation 1500ms ease-in-out;
+        /* background: rgba(7, 7, 7, 0.61);
+        border-radius: 100%; */
     }
 }
 
-.footer-blur{
+.footer-blur {
+    z-index: 3;
     position: fixed;
     bottom: 0;
     width: 100vw;
     height: 100px;
 }
 
-.blur{
+.blur {
     filter: blur(10px);
     transition: 500ms;
 }
 
 .modale {
     transition: 500ms;
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 75vh;
     padding: 20px;
@@ -94,12 +118,44 @@ img {
     display: flex;
     justify-content: center;
 
-    >article{
+    > article {
+        transition: 2s;
+        box-shadow: 0px 5px 10px black;
         transition: 500ms;
         width: 80%;
         height: 100%;
         background-color: aliceblue;
         border-radius: 15px;
-        padding:10px;
+        padding: 10px;
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(-1900deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes deroule {
+    from {
+        transform: translateY(3px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes slide {
+    from {
+        opacity: 0;
+        transform: translate(200px);
+    }
+    to {
+        visibility: visible;
+        opacity: 1;
+        transform: translate(0px);
     }
 }
