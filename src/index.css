@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Supprimer tous les styles par défaut des boutons */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    /* Réinitialisation de toutes les propriétés à leurs valeurs par défaut */
+    all: unset;
+}
+
+.btn-desktop-modifier {
+    display: none;
+}
+
+img {
+    width: 30px;
+}
+
+.liste-tache {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > li {
+        /* height: 50px; */
+        padding: 10px;
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        box-shadow: 0px 10px 20px grey;
+        width: 90vw;
+    }
+
+    > img {
+        position: relative;
+        top: -15px;
+        text-shadow: 0px 10px 20px grey;
+    }
+}
+
+.section-action-liste {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.display {
+    display: none;
+    transition: 500ms;
+
+}
+
+.section-btn-ajouter {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    text-align: center;
+}
+.btn-ajouter {
+    > img {
+        width: 20%;
+    }
+}
+
+.footer-blur{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 100px;
+}
+
+.blur{
+    filter: blur(10px);
+    transition: 500ms;
+}
+
+.modale {
+    transition: 500ms;
+    position: absolute;
+    width: 100vw;
+    height: 75vh;
+    padding: 20px;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+
+    >article{
+        transition: 500ms;
+        width: 80%;
+        height: 100%;
+        background-color: aliceblue;
+        border-radius: 15px;
+        padding:10px;
+    }
+}
