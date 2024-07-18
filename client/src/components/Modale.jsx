@@ -1,19 +1,22 @@
 function Modale() {
-    return (
-        <section className="modale">
-          <article>
+  return (
+    <section className="modale">
+      <article>
+        <h1>Ajoutez un tache</h1>
+        <form action="post" className="form-modale">
+          <input name="titre" id="titre" type="text" placeholder="titre" />
 
-            <h1>coucou modale</h1>
-            <form action="post">
-              <input name="titre" id="titre" type="text" />
-
-              <textarea name="description" id="description"></textarea>
-              <button>Créer</button>
-
-            </form>
-          </article>
-        </section>
-    );
+          <textarea
+            name="description"
+            id="description"
+            className="text-area"
+            placeholder="description de la tache"
+          ></textarea>
+          <button>Créer</button>
+        </form>
+      </article>
+    </section>
+  );
 }
 
 export default Modale;
