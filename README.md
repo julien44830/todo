@@ -8,3 +8,8 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 # todo
+
+
+Simple TodoListe, on peut créer une tache, la modifier et la supprimer.
+
+Prochaine feature, crer une sous tache de la tache principale pour faire fonctionner 2 tables entre elle.
