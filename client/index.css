@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-y: scroll;
 }
 
 /* Supprimer tous les styles par défaut des boutons */
@@ -42,6 +42,7 @@ img {
     align-items: center;
     width: 100vw;
     padding: 100px 20px;
+
 
     > li {
         display: flex;
@@ -241,4 +242,27 @@ p {
         opacity: 1;
         transform: translate(0px);
     }
+}
+
+/* @media screen and (width: 200px) {
+    .btn-ajouter > img {
+        animation: rotation 1500ms ease-in-out;
+    }
+} */
+
+@media screen and (min-width: 900px) {
+  .btn-ajouter {
+    width: 100vw;
+    z-index: 5;
+    padding: 10px;
+    > img {
+      max-width: 100px;
+      max-height: 100px;
+        border-radius: 100%;
+        width: 10%;
+        animation: rotation 1500ms ease-in-out;
+        transition: 250ms;
+    }
+}
+}
 }
