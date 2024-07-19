@@ -23,15 +23,17 @@ function App() {
             });
     }, []);
 
+    
     const ajouterTache = (nouvelleTache) => {
         setTaches((prevTaches) => [...prevTaches, nouvelleTache]);
     };
-
+    
     const handleModifierClick = (tache) => {
         setBtnModal("modifier");
         setSelectedTache(tache);
         setModale(true);
     };
+    
     return (
         <>
             <main className={modale ? "blur" : ""}>

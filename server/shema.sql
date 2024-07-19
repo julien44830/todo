@@ -4,7 +4,7 @@ USE todoliste;
 CREATE TABLE tache (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     titre VARCHAR(50) NOT NULL,
-    description VARCHAR(50) NOT NULL
+    description VARCHAR(300) NOT NULL
 );
 
 
