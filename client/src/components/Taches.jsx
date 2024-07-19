@@ -48,11 +48,39 @@ function Taches({
         setModale(true);
         handleModifierClick(tache);
     };
+    /////////////////////////////////////////////////////////////////////
+
+    const handleDragStart = (e, position) => {
+        e.dataTransfer.setData("position", position);
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const handleDrop = (e, position) => {
+        e.preventDefault();
+        const draggedPosition = e.dataTransfer.getData("position");
+        const draggedItem = taches[draggedPosition];
+
+        // Créer une nouvelle liste de tâches avec l'élément déplacé
+        let updatedTaches = [...taches];
+        updatedTaches.splice(draggedPosition, 1);
+        updatedTaches.splice(position, 0, draggedItem);
+
+        setTaches(updatedTaches);
+    };
 
     return (
         <div className="text">
             <h1 className="h1-tache">Liste des Tâches</h1>
-            <ul className="liste-tache">
+            <ul
+                className="liste-tache"
+                onDragOver={handleDragOver}
+                onDrop={(e) => handleDrop(e, taches.length)}
+            >
+                {" "}
+                // Drop position always at the end>
                 {taches.map((tache, index) => {
                     const delay = `${index / 3}s`;
 
@@ -65,6 +93,8 @@ function Taches({
                             key={tache.id}
                             style={animationStyle}
                             className="liste-todo"
+                            draggable
+                            onDragStart={(e) => handleDragStart(e, index)}
                         >
                             <button
                                 className="btn-mobile-modifier"
