@@ -63,7 +63,6 @@ function Modale({
                         titre: titre,
                         description: description,
                     }),
-                    cache: "no-cache", // Ajoutez cette ligne pour éviter la mise en cache
                 }
             );
 
