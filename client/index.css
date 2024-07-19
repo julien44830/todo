@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 /* Supprimer tous les styles par défaut des boutons */
@@ -42,6 +43,7 @@ img {
     align-items: center;
     width: 100vw;
     padding: 100px 20px;
+    margin-bottom: 200px;
 
 
     > li {
