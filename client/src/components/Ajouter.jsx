@@ -12,7 +12,7 @@ function Ajouter({ setModale, modale, setBtnModal }) {
             >
                 <img
                     src="ajouter.png"
-                    className={modale ? "close" : ""}
+                    className={modale ? "close img" : "img"}
                     alt=""
                 />
             </button>
