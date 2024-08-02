@@ -1,0 +1,30 @@
+.form-login {
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+
+  label {
+    input {
+      height: 40px;
+    }
+  }
+}
+
+.p-input {
+  text-align: start;
+  padding: 10px;
+  position: absolute;
+  transition: 300ms;
+}
+
+.p-input-focus {
+  padding: 0 5px;
+
+  margin-top: -10px;
+  background-color: white;
+  margin-left: 10px;
+  transition: 300ms;
+}

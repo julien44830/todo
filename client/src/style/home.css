@@ -1,0 +1,21 @@
+.main-home {
+  margin-top: 50px;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.img-home {
+  position: fixed;
+  right: 0;
+  top: 30vh;
+  width: 350px;
+  z-index: -1;
+}
+
+.login-home {
+  text-align: center;
+}
