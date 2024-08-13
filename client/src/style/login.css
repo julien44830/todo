@@ -9,12 +9,14 @@
   label {
     input {
       height: 40px;
+      width: 300px;
     }
   }
 }
 
 .p-input {
   text-align: start;
+  width: auto;
   padding: 10px;
   position: absolute;
   transition: 300ms;
@@ -22,9 +24,16 @@
 
 .p-input-focus {
   padding: 0 5px;
-
   margin-top: -10px;
   background-color: white;
+  width: min-content;
+  display: inline-block;
+  overflow-wrap: break-word;
+  white-space: nowrap;
   margin-left: 10px;
   transition: 300ms;
+}
+
+.btn-login {
+  cursor: pointer;
 }

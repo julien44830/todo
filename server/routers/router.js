@@ -123,4 +123,31 @@ router.put("/taches/:id", async (req, res) => {
     }
 });
 
+router.post("/user", async (req, res) => {
+    try {
+        const db = req.db;
+        const { name, email, password } = req.body;
+        const query =
+            "INSERT INTO user (name, email, password) VALUES (?, ?, ?)";
+        const [result] = await db
+            .promise()
+            .query(query, [name, email, password]);
+
+        const selectQuery = "SELECT * FROM tache WHERE id = ?";
+        const [newUser] = await db
+            .promise()
+            .query(selectQuery, [result.insertId]);
+
+        res.status(201).json({
+            message: "User créée avec succès",
+            user: newUser[0],
+        });
+    } catch (err) {
+        console.error("Erreur lors de la création du User :", err);
+        res.status(500).json({
+            error: "Erreur lors de la création du User",
+        });
+    }
+});
+
 export default router;

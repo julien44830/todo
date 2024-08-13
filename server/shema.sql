@@ -1,11 +1,24 @@
 CREATE DATABASE todoliste;
 USE todoliste;
 
+
+CREATE TABLE user (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255)  NULL,
+    email VARCHAR(255)  NULL,
+    password VARCHAR(255)  NULL
+);
+
+
 CREATE TABLE tache (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    titre VARCHAR(255)  NULL,
-    description VARCHAR(300)  NULL
+    titre VARCHAR(255) NULL,
+    description VARCHAR(300) NULL,
+    user_id INT,  -- Ajout de la colonne user_id
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE  -- Clé étrangère vers la table user
 );
+
+
 
 
 -- cette table n'est pas utilisé
