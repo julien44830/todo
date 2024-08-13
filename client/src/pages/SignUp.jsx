@@ -15,7 +15,6 @@ export default function SingUp() {
         password: true,
         verifPassword: false,
     });
-    console.log("%c⧭", "color: #e50000", checkedPassword);
 
     // Fonction appelée lorsque l'élément reçoit le focus
     const handleFocus = (fieldName) => {
@@ -44,11 +43,9 @@ export default function SingUp() {
         }`;
     };
 
-    console.log("%c⧭", "color: #aa00ff", formData);
-
     const reg =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;"'<>,.?/~`]).{8,}$/;
-
     const isValidPassword = reg.test(formData.password);
+
     const forcePassword = () => {
         if (!reg.test(formData.password)) {
             setCheckedPassword((prev) => ({
@@ -78,9 +75,17 @@ export default function SingUp() {
         }
     };
 
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+const validateEmail = (email) => {
+  console.log('%c⧭', 'color: #733d00', emailRegex.test(email));
+  return emailRegex.test(email);
+};
+console.log('%c⧭', 'color: #00bf00', validateEmail(formData.email));
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (checkedPassword.password && checkedPassword.verifPassword) {
+        if (checkedPassword.password && checkedPassword.verifPassword && validateEmail(formData.email)) {
             const { name, email, password } = formData;
 
             try {
@@ -135,7 +140,7 @@ export default function SingUp() {
                 <label>
                     <p className={getInputClassName("email")}>Email</p>
                     <input
-                        type="text"
+                        type="email"
                         name="email"
                         value={formData.email}
                         onFocus={() => handleFocus("email")}
