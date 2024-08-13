@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import Ajouter from "./src/components/Ajouter";
-import Modale from "./src/components/Modale";
-import Taches from "./src/components/Taches";
+import Header from "../components/Header";
+import Ajouter from "../components/Ajouter";
+import Modale from "../components/Modale";
+import Taches from "../components/Taches";
 
-function App() {
+export default function Todopage() {
   const [taches, setTaches] = useState([]);
   const [modale, setModale] = useState(false);
   const [btnModale, setBtnModal] = useState("ajouter");
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <main className={modale ? "blur" : ""}>
         <Taches
           handleModifierClick={handleModifierClick}
@@ -62,5 +64,3 @@ function App() {
     </>
   );
 }
-
-export default App;
