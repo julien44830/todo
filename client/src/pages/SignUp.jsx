@@ -11,6 +11,11 @@ export default function SingUp() {
   });
 
   const [focusedField, setFocusedField] = useState(null);
+  const [checkedPassword, setCheckedPassword] = useState({
+    password: true,
+    verifPassword: false,
+  });
+  console.log("%c⧭", "color: #e50000", checkedPassword);
 
   // Fonction appelée lorsque l'élément reçoit le focus
   const handleFocus = (fieldName) => {
@@ -38,32 +43,66 @@ export default function SingUp() {
   };
 
   console.log("%c⧭", "color: #aa00ff", formData);
+
+  const reg = "rerr";
+  const isValidPassword = formData.password.includes(reg);
+
+  const forcePassword = () => {
+    if (!formData.password.includes(reg)) {
+      setCheckedPassword((prev) => ({
+        ...prev,
+        password: isValidPassword,
+      }));
+    } else {
+      setCheckedPassword((prev) => ({
+        ...prev,
+        password: isValidPassword,
+      }));
+    }
+  };
+
+  const verifPassword = () => {
+    if (formData.password !== formData.checkPassword) {
+      alert("Les mots de passe ne correspondent pas");
+      setCheckedPassword((prev) => ({
+        ...prev,
+        verifPassword: false,
+      }));
+    } else {
+      setCheckedPassword((prev) => ({
+        ...prev,
+        verifPassword: true,
+      }));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (checkedPassword.password && checkedPassword.verifPassword) {
+      const { name, email, password } = formData;
 
-    const { name, email, password, checkPassword } = formData;
+      try {
+        const response = await fetch("http://localhost:3000/api/user/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+          }),
+        });
 
-    try {
-      const response = await fetch("http://localhost:3000/api/user/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      });
+        if (!response.ok) {
+          throw new Error("Erreur lors de l'ajout du User");
+        }
 
-      if (!response.ok) {
-        throw new Error("Erreur lors de l'ajout du User");
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Erreur lors de l'ajout du User :", error);
       }
-
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error("Erreur lors de l'ajout du User :", error);
     }
   };
 
@@ -103,7 +142,10 @@ export default function SingUp() {
             name="password"
             value={formData.password}
             onFocus={() => handleFocus("password")}
-            onBlur={handleBlur}
+            onBlur={() => {
+              handleBlur();
+              forcePassword();
+            }}
             onChange={handleChange}
             required
           />
@@ -117,7 +159,10 @@ export default function SingUp() {
             name="checkPassword"
             value={formData.checkPassword}
             onFocus={() => handleFocus("checkPassword")}
-            onBlur={handleBlur}
+            onBlur={() => {
+              handleBlur();
+              verifPassword();
+            }}
             onChange={handleChange}
             required
           />
@@ -129,6 +174,12 @@ export default function SingUp() {
         <NavLink to="/connexion">
           <p>Déjà un compte ? Connecte toi</p>
         </NavLink>
+        {checkedPassword.password ? null : (
+          <p>
+            Ton mot de passe doit contenir 1 Majuscule, 1 minuscule, 1 chiffre
+            et 1 carractère spéciale.
+          </p>
+        )}
       </form>
       <img className="img-home" src="stylo_plume.png" alt="stylo plume" />
     </>
