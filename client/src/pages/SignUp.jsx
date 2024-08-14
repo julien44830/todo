@@ -3,6 +3,11 @@ import { NavLink } from "react-router-dom";
 import Header from "../components/Header";
 
 export default function SingUp() {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const reg =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;"'<>,.?/~`]).{8,}$/;
+
+
     const [formData, setFormData] = useState({
         email: "",
         name: "",
@@ -10,12 +15,13 @@ export default function SingUp() {
         checkPassword: "",
     });
 
-    const [focusedField, setFocusedField] = useState(null);
     const [checkedPassword, setCheckedPassword] = useState({
         password: true,
         verifPassword: false,
     });
-
+    
+    const [focusedField, setFocusedField] = useState(null);
+    
     // Fonction appelée lorsque l'élément reçoit le focus
     const handleFocus = (fieldName) => {
         setFocusedField(fieldName);
@@ -35,6 +41,7 @@ export default function SingUp() {
         });
     };
 
+    // fonction pour 
     const getInputClassName = (fieldName) => {
         return `p-input ${
             focusedField === fieldName || formData[fieldName]
@@ -43,10 +50,9 @@ export default function SingUp() {
         }`;
     };
 
-    const reg =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;"'<>,.?/~`]).{8,}$/;
-    const isValidPassword = reg.test(formData.password);
-
+    // fonction pour vérifier la dureté du mot de passe
     const forcePassword = () => {
+      const isValidPassword = reg.test(formData.password);
         if (!reg.test(formData.password)) {
             setCheckedPassword((prev) => ({
                 ...prev,
@@ -60,6 +66,7 @@ export default function SingUp() {
         }
     };
 
+    // fonction pour vérifier que les mots de passes sont identiques
     const verifPassword = () => {
         if (formData.password !== formData.checkPassword) {
             alert("Les mots de passe ne correspondent pas");
@@ -75,17 +82,19 @@ export default function SingUp() {
         }
     };
 
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // fonction pour vérifier que l'email est correcte
+    const validateEmail = (email) => {
+        return emailRegex.test(email);
+    };
 
-const validateEmail = (email) => {
-  console.log('%c⧭', 'color: #733d00', emailRegex.test(email));
-  return emailRegex.test(email);
-};
-console.log('%c⧭', 'color: #00bf00', validateEmail(formData.email));
-
+    // fonction pour soumettre le formulaire inscription
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (checkedPassword.password && checkedPassword.verifPassword && validateEmail(formData.email)) {
+        if (
+            checkedPassword.password &&
+            checkedPassword.verifPassword &&
+            validateEmail(formData.email)
+        ) {
             const { name, email, password } = formData;
 
             try {
@@ -154,7 +163,7 @@ console.log('%c⧭', 'color: #00bf00', validateEmail(formData.email));
                         Mot de passe
                     </p>
                     <input
-                        type="password"
+                        type="text"
                         name="password"
                         value={formData.password}
                         onFocus={() => handleFocus("password")}
