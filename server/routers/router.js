@@ -1,7 +1,9 @@
 // Exemple de route dans votre fichier router.js
 import express from "express";
 const router = express.Router();
+import middleware from '../middleWare/argon2.js'; // Chemin vers votre fichier
 
+const { validationPassword, hashPassword, verifyPassword } = middleware;
 // Route pour lire les données de la table tache
 router.get("/taches", async (req, res) => {
     try {
@@ -123,7 +125,7 @@ router.put("/taches/:id", async (req, res) => {
     }
 });
 
-router.post("/user", async (req, res) => {
+router.post("/user",validationPassword, hashPassword, async (req, res) => {
     try {
         const db = req.db;
         const { name, email, password } = req.body;
@@ -133,7 +135,7 @@ router.post("/user", async (req, res) => {
             .promise()
             .query(query, [name, email, password]);
 
-        const selectQuery = "SELECT * FROM tache WHERE id = ?";
+        const selectQuery = "SELECT * FROM user WHERE id = ?";
         const [newUser] = await db
             .promise()
             .query(selectQuery, [result.insertId]);
@@ -142,6 +144,7 @@ router.post("/user", async (req, res) => {
             message: "User créée avec succès",
             user: newUser[0],
         });
+        
     } catch (err) {
         console.error("Erreur lors de la création du User :", err);
         res.status(500).json({

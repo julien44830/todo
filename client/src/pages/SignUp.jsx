@@ -3,10 +3,9 @@ import { NavLink } from "react-router-dom";
 import Header from "../components/Header";
 
 export default function SingUp() {
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const reg =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;"'<>,.?/~`]).{8,}$/;
-
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const reg =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;"'<>,.?/~`]).{8,}$/;
 
     const [formData, setFormData] = useState({
         email: "",
@@ -19,9 +18,9 @@ export default function SingUp() {
         password: true,
         verifPassword: false,
     });
-    
+
     const [focusedField, setFocusedField] = useState(null);
-    
+
     // Fonction appelée lorsque l'élément reçoit le focus
     const handleFocus = (fieldName) => {
         setFocusedField(fieldName);
@@ -41,7 +40,7 @@ export default function SingUp() {
         });
     };
 
-    // fonction pour 
+    // fonction pour
     const getInputClassName = (fieldName) => {
         return `p-input ${
             focusedField === fieldName || formData[fieldName]
@@ -52,7 +51,7 @@ export default function SingUp() {
 
     // fonction pour vérifier la dureté du mot de passe
     const forcePassword = () => {
-      const isValidPassword = reg.test(formData.password);
+        const isValidPassword = reg.test(formData.password);
         if (!reg.test(formData.password)) {
             setCheckedPassword((prev) => ({
                 ...prev,
@@ -119,6 +118,7 @@ export default function SingUp() {
 
                 const data = await response.json();
                 console.log(data);
+                window.location.href = "/connexion";
             } catch (error) {
                 console.error("Erreur lors de l'ajout du User :", error);
             }
