@@ -29,10 +29,10 @@ CREATE TABLE soustache (
     FOREIGN KEY (tache_id) REFERENCES tache(id) ON DELETE CASCADE
 );
 
-INSERT INTO tache (titre, description) VALUES ('Tâche 1', 'Description de la tâche 1');
-INSERT INTO tache (titre, description) VALUES ('Tâche 2', 'Description de la tâche 2');
+-- INSERT INTO tache (titre, description) VALUES ('Tâche 1', 'Description de la tâche 1');
+-- INSERT INTO tache (titre, description) VALUES ('Tâche 2', 'Description de la tâche 2');
 
-INSERT INTO soustache (tache_id, description) VALUES (1, 'Description de la sous-tâche 1 pour la tâche 1');
-INSERT INTO soustache (tache_id, description) VALUES (1, 'Description de la sous-tâche 2 pour la tâche 1');
-INSERT INTO soustache (tache_id, description) VALUES (2, 'Description de la sous-tâche 1 pour la tâche 2');
-INSERT INTO soustache (tache_id, description) VALUES (2, 'Description de la sous-tâche 2 pour la tâche 2');
+-- INSERT INTO soustache (tache_id, description) VALUES (1, 'Description de la sous-tâche 1 pour la tâche 1');
+-- INSERT INTO soustache (tache_id, description) VALUES (1, 'Description de la sous-tâche 2 pour la tâche 1');
+-- INSERT INTO soustache (tache_id, description) VALUES (2, 'Description de la sous-tâche 1 pour la tâche 2');
+-- INSERT INTO soustache (tache_id, description) VALUES (2, 'Description de la sous-tâche 2 pour la tâche 2');

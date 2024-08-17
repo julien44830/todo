@@ -49,8 +49,21 @@ const verifyPassword = async (password, hashedPassword) => {
   }
 };
 
+// Middleware pour authentifier le token JWT
+const authenticateToken = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];
+  if (!token) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.APP_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user; // Ajoute l'utilisateur décodé à la requête
+    next();
+  });
+};
+
 export default {
   validationPassword,
   hashPassword,
   verifyPassword,
+  authenticateToken,
 };
