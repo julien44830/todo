@@ -4,21 +4,26 @@ const router = express.Router();
 import jwt from "jsonwebtoken";
 import middleware from "../middleWare/secu.js"; // Chemin vers votre fichier
 
-const { validationPassword, hashPassword, verifyPassword } = middleware;
+const { validationPassword, hashPassword, verifyPassword, authenticateToken } = middleware;
+
 
 // Route pour lire les données de la table tache
-router.get("/taches", async (req, res) => {
-    try {
-        const db = req.db;
-        const [rows] = await db.promise().query("SELECT * FROM tache");
-        res.json(rows);
-    } catch (err) {
-        console.error("Erreur lors de la récupération des tâches :", err);
-        res.status(500).json({
-            error: "Erreur lors de la récupération des tâches",
-        });
-    }
+router.get("/taches", authenticateToken, async (req, res) => {
+  try {
+    const db = req.db;
+    const userId = req.user.sub; // L'ID de l'utilisateur est stocké dans `sub` du payload du token
+
+    // Requête SQL pour récupérer les tâches de l'utilisateur
+    const [rows] = await db.promise().query("SELECT * FROM tache WHERE user_id = ?", [userId]);
+    res.json(rows);
+  } catch (err) {
+    console.error("Erreur lors de la récupération des tâches :", err);
+    res.status(500).json({
+      error: "Erreur lors de la récupération des tâches",
+    });
+  }
 });
+
 
 // Route pour lire les données de la table soustache
 router.get("/soustaches", async (req, res) => {
@@ -34,15 +39,15 @@ router.get("/soustaches", async (req, res) => {
     }
 });
 
+
 // Route pour créer une nouvelle tâche
-router.post("/taches", async (req, res) => {
+router.post("/taches",authenticateToken, async (req, res) => {
   try {
       const db = req.db;
       const { titre, description } = req.body;
 
       // Suppose que l'ID de l'utilisateur est stocké dans req.user.id après l'authentification
-      const userId = req.user;
-      console.log('%c⧭', 'color: #0088cc', userId);
+      const userId = req.user.sub;
 
       // Requête pour insérer une nouvelle tâche associée à l'utilisateur
       const query = "INSERT INTO tache (titre, description, user_id) VALUES (?, ?, ?)";
@@ -63,6 +68,7 @@ router.post("/taches", async (req, res) => {
       });
   }
 });
+
 
 // Route pour supprimer une tache
 router.delete("/taches/:id", async (req, res) => {
@@ -98,6 +104,7 @@ router.delete("/taches/:id", async (req, res) => {
     }
 });
 
+
 // Route pour mettre à jour une tâche
 router.put("/taches/:id", async (req, res) => {
     const idTache = req.params.id;
@@ -132,6 +139,7 @@ router.put("/taches/:id", async (req, res) => {
     }
 });
 
+
 // route pour créer un utilisateur
 router.post("/user", validationPassword, hashPassword, async (req, res) => {
     try {
@@ -160,21 +168,16 @@ router.post("/user", validationPassword, hashPassword, async (req, res) => {
     }
 });
 
-// route pour connecter un utilisaterur
 
+// route pour connecter un utilisaterur
 router.post("/login", async (req, res, next) => {
   try {
       const { email, password } = req.body;
 
-      console.log("Avant la requête SQL");
-
-      // Requête SQL pour récupérer l'utilisateur
       const db = req.db;
       const [rows] = await db.promise().query('SELECT * FROM user WHERE email = ?', [email]);
       const user = rows[0];
       
-      console.log("Après la requête SQL, utilisateur trouvé :", user);
-
       if (!user) {
           return res.sendStatus(401); // Utilisateur non trouvé
       }
@@ -196,42 +199,5 @@ router.post("/login", async (req, res, next) => {
       return next(error);
   }
 });
-
-
-
-// router.post("/login", async (req, res, next) => {
-//   try {
-//     const { email, password } = req.body;
-    
-//     // Lire l'utilisateur depuis la base de données
-//     console.log("coucou2")
-//     const user = await tables.user.readByEmail(email);
-//         if (!user) {
-//             return res.sendStatus(401); // Utilisateur non trouvé
-//         }
-
-//         // Vérifier le mot de passe
-//         const isPasswordValid = await verifyPassword(password, user.password);
-//         if (!isPasswordValid) {
-//             return res.sendStatus(401); // Mot de passe invalide
-//         }
-
-//         // Créer le payload pour le token
-//         const payload = { sub: user.id };
-//         const token = jwt.sign(payload, process.env.APP_SECRET, {
-//             expiresIn: "1h",
-//         });
-
-//         // Supprimer le mot de passe de l'objet utilisateur
-//         delete user.password;
-
-//         // Envoyer la réponse avec le token et les informations de l'utilisateur
-//         return res.status(200).json({ token, user });
-//     } catch (error) {
-//         // Passer l'erreur au middleware de gestion des erreurs
-//         console.error("Erreur lors de la connexion de l'utilisateur :", error);
-//         return next(error);
-//     }
-// });
 
 export default router;

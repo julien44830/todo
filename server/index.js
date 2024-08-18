@@ -21,7 +21,6 @@ connection.connect((err) => {
         console.error("Erreur de connexion à la base de données :", err);
         return;
     }
-    console.log("Connexion à la base de données MySQL réussie");
 });
 
 // Middleware pour passer la connexion à toutes les routes

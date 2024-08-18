@@ -55,13 +55,9 @@ export default function Login() {
             }
 
             const data = await response.json();
-            console.log("Login successful:", data);
 
             localStorage.setItem('token', data.token);
-
-            // Stocker d'autres informations utilisateur si nécessaire
             localStorage.setItem('user', JSON.stringify(data.user));
-
             window.location.href = "/liste";
 
             // Vous pouvez rediriger ou mettre à jour l'état ici

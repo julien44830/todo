@@ -10,16 +10,29 @@ export default function Todopage() {
   const [btnModale, setBtnModal] = useState("ajouter");
   const [selectedTache, setSelectedTache] = useState(null);
 
+  
   useEffect(() => {
-    fetch("http://localhost:3000/api/taches")
-      .then((response) => response.json())
-      .then((data) => {
-        setTaches(data);
-      })
-      .catch((error) => {
+    fetch("http://localhost:3000/api/taches", {
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem('token')}`, // Ajouter l'en-tête Authorization
+        },
+    })
+    .then((response) => {
+        // Vérifiez si la réponse est au format texte
+        return response.text(); 
+    })
+    .then((text) => {
+        try {
+            const data = JSON.parse(text);
+            setTaches(data);
+        } catch (error) {
+            console.error("Erreur lors du parsing JSON :", error);
+        }
+    })
+    .catch((error) => {
         console.error("Erreur lors de la récupération des données:", error);
-      });
-  }, []);
+    });
+}, []);
 
   const ajouterTache = (nouvelleTache) => {
     setTaches((prevTaches) => [...prevTaches, nouvelleTache]);
@@ -29,6 +42,12 @@ export default function Todopage() {
     setBtnModal("modifier");
     setSelectedTache(tache);
     setModale(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Supprimez le token du stockage local
+    localStorage.removeItem('user'); // Supprimez les informations de l'utilisateur du stockage local
+    window.location.href = '/connexion'; // Redirigez vers la page de connexion ou d'accueil
   };
 
   return (
@@ -42,6 +61,7 @@ export default function Todopage() {
           setBtnModal={setBtnModal}
           setModale={setModale}
         />
+        <button onClick={handleLogout}>Déconnexion</button>
       </main>
       <Ajouter
         setBtnModal={setBtnModal}

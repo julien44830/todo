@@ -25,10 +25,12 @@ function Modale({
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch("http://localhost:3000/api/taches", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
           titre: titre,
@@ -36,12 +38,12 @@ function Modale({
         }),
       });
 
+
       if (!response.ok) {
         throw new Error("Erreur lors de l'ajout de la tâche");
       }
 
       const data = await response.json();
-      console.log(data);
       onAjoutTache(data.task);
       setModale(false);
     } catch (error) {

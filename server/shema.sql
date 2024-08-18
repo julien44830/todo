@@ -15,7 +15,7 @@ CREATE TABLE tache (
     titre VARCHAR(255) NULL,
     description VARCHAR(300) NULL,
     user_id INT,  -- Ajout de la colonne user_id
-    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE  -- Clé étrangère vers la table user
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE NOT NULL  -- Clé étrangère vers la table user
 );
 
 

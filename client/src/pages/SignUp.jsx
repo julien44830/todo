@@ -116,8 +116,7 @@ export default function SingUp() {
                     throw new Error("Erreur lors de l'ajout du User");
                 }
 
-                const data = await response.json();
-                console.log(data);
+                // const data = await response.json();
                 window.location.href = "/connexion";
             } catch (error) {
                 console.error("Erreur lors de l'ajout du User :", error);

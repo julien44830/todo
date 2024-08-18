@@ -11,7 +11,6 @@ function Taches({
   const [sousTaches, setSousTaches] = useState([]);
   const [wrap, setWrap] = useState(taches.map(() => true));
   const [fini, setFini] = useState(taches.map(() => true));
-  console.log("%c⧭", "color: #e57373", fini);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/soustaches")
