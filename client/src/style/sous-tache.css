@@ -1,0 +1,41 @@
+.sous-tache-unvisible{
+  display: none;
+}
+
+.sous-tache-visible{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vw;
+  top: 0;
+  z-index: 5;
+  padding: 40px;
+
+  article:first-child{
+    background-color: rgba(216, 173, 131, 0.486);
+    box-shadow: 0px 5px 10px rgb(173, 173, 173);
+    border-radius: 15px;
+    padding: 10px;
+    transition: 500ms;
+    height: 70%;
+    width: 70%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    button{
+      position: relative;
+      bottom: 0;
+      cursor: pointer;
+    }
+  }
+}
+

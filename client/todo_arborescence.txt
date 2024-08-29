@@ -1,0 +1,53 @@
+todo
+├── .eslintrc.cjs
+├── .gitignore
+├── client
+│   ├── .vite
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   ├── index.html
+│   ├── main.jsx
+│   ├── node_modules
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   ├── ajouter.png
+│   │   ├── derouler.png
+│   │   ├── modifier.png
+│   │   ├── stylo_plume.png
+│   │   ├── supprimer.png
+│   │   └── valider.png
+│   ├── src
+│   │   ├── components
+│   │   │   ├── Ajouter.jsx
+│   │   │   ├── Header.jsx
+│   │   │   ├── Modale.jsx
+│   │   │   ├── Taches.jsx
+│   │   │   └── Todopage.jsx
+│   │   ├── pages
+│   │   │   ├── Home.jsx
+│   │   │   ├── Login.jsx
+│   │   │   └── SignUp.jsx
+│   │   └── style
+│   │       ├── home.css
+│   │       └── login.css
+│   └── vite.config.js
+├── debug.log
+├── model_BDD.png
+├── README.md
+├── requests.http
+└── server
+    ├── .env
+    ├── .env.sample
+    ├── dbConfig.js
+    ├── index.js
+    ├── middleWare
+    │   └── secu.js
+    ├── node_modules
+    ├── package-lock.json
+    ├── package.json
+    ├── request.http
+    ├── routers
+    │   └── router.js
+    └── shema.sql

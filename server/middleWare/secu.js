@@ -1,4 +1,6 @@
 import { argon2id, hash, verify } from "argon2";
+import jwt from "jsonwebtoken";
+
 
 const hashingOptions = {
   type: argon2id,
@@ -49,8 +51,26 @@ const verifyPassword = async (password, hashedPassword) => {
   }
 };
 
+// Middleware pour authentifier le token JWT
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token){
+    return res.redirect('/connexion')
+  } 
+    
+
+  jwt.verify(token, process.env.APP_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user; // Assigner l'utilisateur au contexte de la requête
+    next();
+  });
+};
+
 export default {
   validationPassword,
   hashPassword,
   verifyPassword,
+  authenticateToken,
 };

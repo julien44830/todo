@@ -1,5 +1,6 @@
 @import "./src/style/home.css";
 @import "./src/style/login.css";
+@import "./src/style/sous-tache.css";
 
 * {
   margin: 0;
@@ -13,9 +14,12 @@
 button,
 input[type="button"],
 input[type="submit"],
-input[type="reset"] {
+input[type="reset"],
+input[type="checkbox"] {
   all: unset;
+  cursor: pointer;
 }
+
 
 .text {
   font-family: "Inter Tight", sans-serif;
@@ -69,12 +73,16 @@ img {
   }
 }
 
+.checkbox-fini{
+  background-image: src("valider.png");
+}
+
 .liste-todo {
   overflow-wrap: break-word;
   transition: 1s;
 }
 
-p {
+.p-tache {
   /* overflow: hidden; */
   width: 150px;
   text-overflow: ellipsis;
@@ -118,6 +126,7 @@ p {
     width: 100vw;
     z-index: 5;
     padding: 10px;
+    
     > img {
       border-radius: 100%;
       width: 20%;
@@ -152,6 +161,8 @@ p {
   position: fixed;
   width: 100vw;
   height: 75vh;
+
+
   padding: 20px;
   z-index: 10;
   top: 70px;
@@ -163,8 +174,10 @@ p {
     transition: 2s;
     box-shadow: 0px 5px 10px rgb(173, 173, 173);
     transition: 500ms;
-    width: 80%;
+
     height: 100%;
+    width: 70%;
+
     background-color: rgba(216, 173, 131, 0.486);
     border-radius: 15px;
     padding: 10px;
@@ -251,12 +264,6 @@ p {
     transform: translate(0px);
   }
 }
-
-/* @media screen and (width: 200px) {
-    .btn-ajouter > img {
-        animation: rotation 1500ms ease-in-out;
-    }
-} */
 
 @media screen and (min-width: 900px) {
   .btn-ajouter {
