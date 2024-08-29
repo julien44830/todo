@@ -7,10 +7,14 @@ function Taches({
     setBtnModal,
     setModale,
     handleModifierClick,
+    handleDeroulerClick,
+    selectedTache,
+    setModaleSousTache,
+    modaleSousTache,
 }) {
-    const [sousTaches, setSousTaches] = useState([]);
     const [wrap, setWrap] = useState(taches.map(() => true));
     const [fini, setFini] = useState(taches.map(() => true));
+    console.log("%c⧭", "color: #807160", taches);
 
     useEffect(() => {
         fetch("http://localhost:3000/api/soustaches")
@@ -47,12 +51,6 @@ function Taches({
         } catch (error) {
             console.error("Erreur lors de la suppression de la tâche :", error);
         }
-    };
-
-    const handleClick = (tache) => {
-        setBtnModal("modifier");
-        setModale(true);
-        handleModifierClick(tache);
     };
 
     const handleDragStart = (e, position) => {
@@ -101,10 +99,21 @@ function Taches({
     //   setTaches(updatedTaches);
     // };
 
-    const handleDeroulerClick = (index) => {
-        setWrap((prevWrap) =>
-            prevWrap.map((value, i) => (i === index ? !value : value))
-        );
+    const handleClick = (tache) => {
+        setBtnModal("modifier");
+        setModale(true);
+        handleModifierClick(tache);
+    };
+
+    // const handleDeroulerClick = (index) => {
+    //     setModaleSousTache(!modaleSousTache);
+    //     setWrap((prevWrap) =>
+    //         prevWrap.map((value, i) => (i === index ? !value : value))
+    //     );
+    // };
+
+    const gestionModale = () => {
+        setModaleSousTache(!modaleSousTache);
     };
 
     const handleFiniClick = (index) => {
@@ -117,10 +126,7 @@ function Taches({
         <>
             <div className="text">
                 <ul
-                
-                // !retirer la class blur elle n'est la que pour le developpement du composant SousTache.jsx
-                    className="liste-tache blur"
-
+                    className={`liste-tache ${modaleSousTache ? "blur" : ""}`}
                     onDragOver={handleDragOver}
                     // onDrop={(e) => handleDrop(e, taches.length)}
                     onDrop={(e) => handleDrop(e, event.target.parentNode)}
@@ -139,15 +145,22 @@ function Taches({
                                 draggable
                                 onDragStart={(e) => handleDragStart(e, index)}
                             >
+                                <label>
                                 <input
                                     type="checkbox"
                                     onChange={() => handleFiniClick(index)}
-                                ></input>
+                                    className="checkboxfini"
+                                    />
+                                    <img src="valider.png" alt="" />
+                                </label>
+                                
                                 <section className={fini[index] ? "fini" : ""}>
-                                    <p>
+                                    <p className="p-tache">
                                         <strong>{tache.titre}</strong>:
                                     </p>
-                                    <p>{tache.description}</p>
+                                    <p className="p-tache">
+                                        {tache.description}
+                                    </p>
                                 </section>
                                 <section className="section-action-liste">
                                     <button
@@ -182,7 +195,7 @@ function Taches({
                                     </section>
                                 </section>
                                 <button
-                                    onClick={() => handleDeroulerClick(index)}
+                                    onClick={() => handleDeroulerClick(tache)}
                                     className="derouler-arrow"
                                     type="button"
                                 >
@@ -196,8 +209,19 @@ function Taches({
                     })}
                 </ul>
             </div>
-            <div className="sous-tache-visible">
-            <SousTache />
+            <div
+                onClick={gestionModale}
+                className={
+                    modaleSousTache
+                        ? "sous-tache-visible"
+                        : "sous-tache-unvisible"
+                }
+            >
+                <SousTache
+                    selectedTache={selectedTache}
+                    taches={taches}
+                    handleModifierClick={handleModifierClick}
+                />
             </div>
         </>
     );

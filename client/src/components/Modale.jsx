@@ -9,6 +9,8 @@ function Modale({
   taches,
   setTaches,
 }) {
+  console.log('%c⧭', 'color: #ffa640', selectedTache);
+  console.log('%c⧭', 'color: #d90000', taches);
   const [titre, setTitre] = useState("");
   const [description, setDescription] = useState("");
 

@@ -8,7 +8,12 @@ export default function Todopage() {
   const [taches, setTaches] = useState([]);
   const [modale, setModale] = useState(false);
   const [btnModale, setBtnModal] = useState("ajouter");
+  const [modaleSousTache, setModaleSousTache] = useState(false);
+
   const [selectedTache, setSelectedTache] = useState(null);
+  const [sousTaches, setSousTaches] = useState([]);
+
+  console.log('%c⧭', 'color: #f200e2', selectedTache);
 
 
   useEffect(() => {
@@ -44,6 +49,11 @@ export default function Todopage() {
     setModale(true);
   };
 
+  const handleDeroulerClick = (tache) => {
+    setModaleSousTache(!modaleSousTache);
+    setSelectedTache(tache);
+};
+
   const handleLogout = () => {
     localStorage.removeItem('token'); // Supprimez le token du stockage local
     localStorage.removeItem('user'); // Supprimez les informations de l'utilisateur du stockage local
@@ -56,10 +66,14 @@ export default function Todopage() {
       <main className={modale ? "blur" : ""}>
         <Taches
           handleModifierClick={handleModifierClick}
+          handleDeroulerClick={handleDeroulerClick}
           taches={taches}
           setTaches={setTaches}
           setBtnModal={setBtnModal}
           setModale={setModale}
+          setModaleSousTache={setModaleSousTache}
+          modaleSousTache={modaleSousTache}
+          selectedTache={selectedTache}
         />
         <button onClick={handleLogout}>Déconnexion</button>
       </main>
