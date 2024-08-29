@@ -1,0 +1,18 @@
+.sous-tache-unvisible{
+  display: none;
+}
+
+.sous-tache-visible{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  z-index: 5;
+
+
+  border: 1px solid red
+}
+

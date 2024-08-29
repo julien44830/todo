@@ -10,20 +10,20 @@ export default function Todopage() {
   const [btnModale, setBtnModal] = useState("ajouter");
   const [selectedTache, setSelectedTache] = useState(null);
 
-  
+
   useEffect(() => {
-    fetch("http://localhost:3000/api/taches", {
+    fetch(`${import.meta.env.VITE_API_URL}/api/taches`, {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem('token')}`, // Ajouter l'en-tête Authorization
         },
     })
     .then((response) => {
-        // Vérifiez si la réponse est au format texte
+
         return response.text(); 
     })
     .then((text) => {
         try {
-            const data = JSON.parse(text);
+            const data = JSON.parse(text); 
             setTaches(data);
         } catch (error) {
             console.error("Erreur lors du parsing JSON :", error);

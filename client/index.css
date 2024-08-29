@@ -1,5 +1,6 @@
 @import "./src/style/home.css";
 @import "./src/style/login.css";
+@import "./src/style/sous-tache.css";
 
 * {
   margin: 0;
@@ -118,6 +119,7 @@ p {
     width: 100vw;
     z-index: 5;
     padding: 10px;
+    
     > img {
       border-radius: 100%;
       width: 20%;
@@ -251,12 +253,6 @@ p {
     transform: translate(0px);
   }
 }
-
-/* @media screen and (width: 200px) {
-    .btn-ajouter > img {
-        animation: rotation 1500ms ease-in-out;
-    }
-} */
 
 @media screen and (min-width: 900px) {
   .btn-ajouter {

@@ -4,7 +4,7 @@ import Header from "../components/Header";
 
 export default function SingUp() {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const reg =
+    const passwordRegex  =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;"'<>,.?/~`]).{8,}$/;
 
     const [formData, setFormData] = useState({
@@ -51,8 +51,8 @@ export default function SingUp() {
 
     // fonction pour vérifier la dureté du mot de passe
     const forcePassword = () => {
-        const isValidPassword = reg.test(formData.password);
-        if (!reg.test(formData.password)) {
+        const isValidPassword = passwordRegex .test(formData.password);
+        if (!passwordRegex .test(formData.password)) {
             setCheckedPassword((prev) => ({
                 ...prev,
                 password: isValidPassword,
@@ -98,7 +98,7 @@ export default function SingUp() {
 
             try {
                 const response = await fetch(
-                    "http://localhost:3000/api/user/",
+                    `${import.meta.env.VITE_API_URL}/api/user/`,
                     {
                         method: "POST",
                         headers: {
