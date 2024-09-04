@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from "prop-types";
 
 function Ajouter({ setModale, modale, setBtnModal }) {
@@ -13,7 +14,7 @@ function Ajouter({ setModale, modale, setBtnModal }) {
         <img
           src="ajouter.png"
           className={modale ? "close img" : "img"}
-          alt=""
+          alt="bouton ajouter"
         />
       </button>
     </section>
@@ -21,6 +22,7 @@ function Ajouter({ setModale, modale, setBtnModal }) {
 }
 
 Ajouter.propTypes = {
+  setBtnModal: PropTypes.func.isRequired,
   setModale: PropTypes.func.isRequired,
   modale: PropTypes.bool.isRequired,
 };

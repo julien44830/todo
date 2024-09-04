@@ -46,6 +46,7 @@ Installation de l'application :
 
 Prochaines fonctionnalités :
 
+  Création de couleur pour classer les taches
   Création de sous-tâches : Ajoutez des sous-tâches aux tâches principales.
   Gestion des listes de tâches distinctes : Organisez les tâches en différentes listes.
   Partage des listes de tâches : Permettez le partage des listes de tâches entre utilisateurs.
